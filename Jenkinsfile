@@ -4,7 +4,7 @@ pipeline {
         stage('clone') { 
             steps {
                 sh "rm -rf *"
-                sh "git clone https://github.com/hamzabr22/Test.git"
+                sh "git clone https://github.com/hamzabr22/Test"
             }
         }
         stage('build') { 
