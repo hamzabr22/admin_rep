@@ -16,6 +16,6 @@ pipeline {
             steps {
                 sh "cd jenkins-helloworld/ && java Main"
             }
-        }
-    }
+        }
+    }
 }
