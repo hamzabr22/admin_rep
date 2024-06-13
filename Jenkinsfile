@@ -1,26 +1,21 @@
 pipeline {
-  agent any
-  stages {
-    stage("checkout") {
-      steps {
-        checkout scm
-      }
+    agent any 
+    stages {
+        stage('clone') { 
+            steps {
+                sh "rm -rf *"
+                sh "git clone https://github.com/priximmo/jenkins-helloworld"
+            }
+        }
+        stage('build') { 
+            steps {
+                sh "cd jenkins-helloworld/ && javac Main.java"
+            }
+        }
+        stage('run') { 
+            steps {
+                sh "cd jenkins-helloworld/ && java Main"
+            }
+        }
     }
-    stage("Test") {
-      steps {
-        bat 'npm install'
-        bat 'npm test'
-      }
-    }
-    stage("Build") {
-      steps {
-        bat 'npm run build'
-      }
-    }
-    stage("Build Image"){
-      steps{
-        bat 'docker build -t microservice:1.0 .'
-      }
-    }
-  }
 }
