@@ -1,20 +1,25 @@
 pipeline {
-    agent any 
+    agent any
     stages {
-        stage('clone') { 
+        stage('Clone') {
             steps {
                 sh "rm -rf *"
-                sh "git clone https://github.com/priximmo/jenkins-helloworld"
+                sh "git clone https://github.com/hamzabr22/admin_rep.git"
             }
         }
-        stage('build') { 
+        stage('Install Dependencies') {
             steps {
-                sh "cd jenkins-helloworld/ && javac Main.java"
+                sh """
+                cd your-laravel-repo
+                composer install
+                cp .env.example .env
+                php artisan key:generate
+                """
             }
         }
-        stage('run') { 
+        stage('Run Tests') {
             steps {
-                sh "cd jenkins-helloworld/ && java Main"
+                sh "cd your-laravel-repo && php artisan test"
             }
         }
     }
